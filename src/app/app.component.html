@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous" />
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Teko&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="main">
+        <h1 class="titletag">Lista obowiazkow</h1>
+        <div class="main-section">
+            <div class="main-section-title">
+                <h2 class="h2-font">Lista zadan {{ task_list.length }}</h2>
+            </div>
+            <ng-container *ngIf="task_list.length < 1">
+                <h4>Masz czas wolny brak obowiazkow</h4>
+            </ng-container>
+            <div class="main-section-div-ul">
+                <ul class="main-section-ul">
+                    <li *ngFor="let item of task_list">
+                        {{ item }} - {{ now_date | date: 'short' }}
+                        <button (click)="complete(item)" class="btn btn-primary">
+                                Wykonano
+                            </button>
+                        <button (click)="delete(item)" type="button" class="btn btn-dark btn-circle">
+                                Usun
+                            </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main-section">
+            <div class="main-section-title">
+                <h2 class="h2-font">Lista zadan wykonanych {{ task_listdone.length }}</h2>
+            </div>
+            <ng-container *ngIf="task_listdone.length < 1">
+                <h4>Nic dziś nie zrobiłeś</h4>
+            </ng-container>
+            <div class="main-section-div-ul">
+                <ul class="main-section-ul">
+                    <li *ngFor="let item_done of task_listdone">
+                        {{ item_done }} - {{ now_date | date: 'short' }}
+                    </li>
+                    <ng-container *ngIf="task_listdone.length > 0">
+                        <button (click)="deleteall()" class="btn btn-primary" style="width: 360px !important">
+                                Wyczysc
+                            </button>
+                    </ng-container>
+                </ul>
+            </div>
+        </div>
+        <div class="main-section-end">
+            <input [(ngModel)]="task" class="form-control form-control-lg" type="text" placeholder="Dodaj nowe zadanie" />
+            <button (click)="add()" class="btn btn-primary" style="width: 360px !important">
+                    Dodaj
+                </button>
+        </div>
+    </div>
+</body>
+
+</html>
